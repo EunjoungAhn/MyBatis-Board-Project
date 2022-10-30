@@ -21,7 +21,7 @@ public class PageHandler {
             this.pageSize = pageSize;
 
 
-            this.totalPage = (int)Math.ceil(totalCnt / pageSize);
+            this.totalPage = (int)Math.ceil(totalCnt / (double)pageSize);// 전체 페이지에서 마지막 페이징 구간에서 반올림이 안됨으로 더블로 처리
             this.beginPage = page / naviSize * naviSize + 1; // 11 -> 11, 10 -> 1, 15->11. 따로 떼어내서 테스트
             this.endPage = Math.min(beginPage + naviSize - 1, totalPage); // 둘중 작은 값이 담긴다.
             this.showPrev = beginPage!=1;
