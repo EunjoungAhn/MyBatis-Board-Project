@@ -22,4 +22,13 @@ public class PageHandlerTest {
         assertTrue(ph.getBeginPage() ==21);
         assertTrue(ph.getEndPage() ==26);
     }
+
+    @Test
+    public void test3() {
+        PageHandler ph = new PageHandler(255, 10);
+        ph.print();
+        System.out.println("ph = " + ph);
+        assertTrue(ph.getBeginPage() ==1);
+        assertTrue(ph.getEndPage() ==10);
+    }
 }
