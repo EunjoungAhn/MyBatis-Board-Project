@@ -41,6 +41,7 @@ public class LoginController {
 
         // 1. id와 pwd를 확인
         if(!loginCheck(id, pwd)) {
+            System.out.println("들어고 있음!! id = " + id);
             // 2-1   일치하지 않으면, loginForm으로 이동
             String msg = URLEncoder.encode("id 또는 pwd가 일치하지 않습니다.", "utf-8");
 
