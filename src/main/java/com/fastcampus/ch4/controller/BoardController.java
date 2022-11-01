@@ -18,6 +18,43 @@ public class BoardController {
     @Autowired
     BoardService boardService;
 
+    @PostMapping("/remove")
+    public String remove(Integer bno, Integer page, Integer pageSize, RedirectAttributes rattr, HttpSession session) {
+        String writer = (String)session.getAttribute("id");
+        String msg = "DEL_OK";
+
+        try {
+            if(boardService.remove(bno, writer)!=1)
+                throw new Exception("Delete failed.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            msg = "DEL_ERR";
+        }
+
+        rattr.addAttribute("page", page);
+        rattr.addAttribute("pageSize", pageSize);
+        rattr.addFlashAttribute("msg", msg);
+        return "redirect:/board/list";
+    }
+    @GetMapping("/read")
+    public String read(Integer bno, Integer page, Integer pageSize, RedirectAttributes rattr, Model m) {
+        try {
+            BoardDto boardDto = boardService.read(bno);
+            //m.addAttribute("boardDto", boardDto); //아래 문장과 동일
+            m.addAttribute(boardDto);
+            m.addAttribute("page", page);
+            m.addAttribute("pageSize", pageSize);
+        } catch (Exception e) {
+            e.printStackTrace();
+            rattr.addAttribute("page", page);
+            rattr.addAttribute("pageSize", pageSize);
+            rattr.addFlashAttribute("msg", "READ_ERR");
+            return "redirect:/board/list";
+        }
+
+        return "board";
+    }
+
     @GetMapping("/list")
     public String list(@RequestParam(defaultValue ="1") Integer page,
                        @RequestParam(defaultValue = "10") Integer pageSize,Model m, HttpServletRequest request) {
