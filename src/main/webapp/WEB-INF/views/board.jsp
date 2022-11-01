@@ -85,8 +85,8 @@
     <form id="form" class="frm" action="" method="post">
         <input type="hidden" name="bno" value="${boardDto.bno}">
 
-        <input name="title" type="text" value="${boardDto.title}" placeholder="  제목을 입력해 주세요." ${mode=="new" ? "" : "readonly='readonly'"}>            <br>
-        <textarea name="content" rows="20" placeholder=" 내용을 입력해 주세요." ${mode=="new" ? "" : "readonly='readonly'"}>${boardDto.content}</textarea>      <br>
+        <input name="title" type="text" value="${boardDto.title}" placeholder="  제목을 입력해 주세요." ${mode=="new" ? "" : "readonly='readonly'"}><br>
+        <textarea name="content" rows="20" placeholder=" 내용을 입력해 주세요." ${mode=="new" ? "" : "readonly='readonly'"}>${boardDto.content}</textarea><br>
 
 
         <c:if test="${mode eq 'new'}">
@@ -130,17 +130,17 @@
         });
         $("#modifyBtn").on("click", function(){
             let form = $("#form");
-            let readonly = $("input[name=title]", "#form").attr('readonly');
+            let isReadonly = $("input[name=title]").attr('readonly');
             // 1. 읽기 상태이면, 수정 상태로 변경
-            if(readonly!=undefined) {
+            if(isReadonly=='readonly') {
                 $(".writing-header").html("게시판 수정");
-                $("input[name=title]", "#form").attr('readonly', false);
-                $("textarea", "#form").attr('readonly', false);
+                $("input[name=title]").attr('readonly', false);
+                $("textarea").attr('readonly', false);
                 $("#modifyBtn").html("<i class='fa fa-pencil'></i> 등록");
                 return;
             }
             // 2. 수정 상태이면, 수정된 내용을 서버로 전송
-            form.attr("action", "<c:url value='/board/modify'/>");
+            form.attr("action", "<c:url value='/board/modify?page=${page}&pageSize=${pageSize}'/>");
             form.attr("method", "post");
             if(formCheck())
                 form.submit();
