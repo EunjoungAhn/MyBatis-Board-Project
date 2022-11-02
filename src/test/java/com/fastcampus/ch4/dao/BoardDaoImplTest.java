@@ -6,6 +6,7 @@ import org.junit.runner.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.test.context.*;
 import org.springframework.test.context.junit4.*;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.*;
 
@@ -16,6 +17,20 @@ import static org.junit.Assert.*;
 public class BoardDaoImplTest {
     @Autowired
     private BoardDao boardDao;
+
+    @Test
+    public void searchSelectPageTest() throws Exception{
+        boardDao.deleteAll();
+        for (int i = 1; i <= 20; i++) {
+            BoardDto boardDto = new BoardDto("title"+i, "asdfasdfasdf", "asdf");
+            boardDao.insert(boardDto);
+        }
+
+        SearchCondition sc = new SearchCondition(1, 10, "T", "title2"); // title2%
+        List<BoardDto> list =boardDao.searchSelectPage(sc);
+        System.out.println("list = " + list);
+        assertTrue(list.size()==2); // 1~20, title2, title20
+    }
 
     @Test //테스트용으로 테이터 넣기
     public void insertTestData() throws Exception {
