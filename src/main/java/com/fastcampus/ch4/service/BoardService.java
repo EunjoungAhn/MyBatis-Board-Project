@@ -12,10 +12,6 @@ public interface BoardService {
     BoardDto read(Integer bno) throws Exception;
     List<BoardDto> getPage(Map map) throws Exception;
     int modify(BoardDto boardDto) throws Exception;
-
-    /*
     int getSearchResultCnt(SearchCondition sc) throws Exception;
     List<BoardDto> getSearchResultPage(SearchCondition sc) throws Exception;
-
-     */
 }
