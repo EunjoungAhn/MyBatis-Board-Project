@@ -1,0 +1,562 @@
+/*VISUAL - 메인 상단 이미지*/
+.visual {
+  margin-top: 120px;
+  background-image: url("../images/visual_bg.jpg");
+  background-position: center;
+}
+.visual .inner {
+  height: 646px;
+}
+.visual .title {
+  position: absolute;
+  top: 88px;
+  left: -10px;
+}
+.visual .title .btn {
+  position: absolute;
+  top: 259px;
+  left: 173px;
+}
+.visual .cup1.image {
+  position: absolute;
+  bottom: 0;
+  right: -47px;
+}
+.visual .cup1.text {
+  position: absolute;
+  top: 38px;
+  right: 171px;
+}
+.visual .cup2.image {
+  position: absolute;
+  bottom: 0;
+  right: 162px;
+}
+.visual .cup2.text {
+  position: absolute;
+  top: 321px;
+  right: 416px;
+}
+.visual .spoon {
+  position: absolute;
+  bottom: 0;
+  left: 275px;
+}
+/* 먼저 이미지가 안보이도록 하고 */
+.visual .fade-in {
+  opacity: 0;
+}
+/*NOTICE*/
+/*NOTICE LINE*/
+.notice .notice-line {
+  position: relative;
+}
+.notice .notice-line .bg-left {
+  width: 50%;
+  height: 100%;
+  background-color: #333;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.notice .notice-line .bg-right {
+  width: 50%;
+  height: 100%;
+  background-color: #f6f5ef;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.notice .notice-line .inner {
+  height: 62px;
+  z-index: 1;
+  display: flex;
+}
+.notice .notice-line .inner__left {
+  width: 60%;
+  height: 100%;
+  background-color: #333;
+  display: flex;
+  align-items: center;
+}
+.notice .notice-line .inner__left h2 {
+  color: #fff;
+  font-size: 17px;
+  font-weight: 700;
+  margin-right: 20px;
+}
+.notice .notice-line .inner__left .swiper-container {
+  height: 62px;
+  flex-grow: 1;
+}
+.notice .notice-line .inner__left .swiper-slide {
+  height: 62px;
+  display: flex;
+  align-items: center;
+}
+.notice .notice-line .inner__left .swiper-slide a {
+  color: #fff;
+}
+.notice .notice-line .inner__left .notice-line__more {
+  width: 62px;
+  height: 62px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.notice .notice-line .inner__left .notice-line__more .material-icons {
+  color: #fff;
+  font-size: 30px;
+}
+.notice .notice-line .inner__right {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.notice .notice-line .inner__right h2 {
+  font-size: 17px;
+  font-weight: 700;
+}
+.notice .notice-line .inner__right .toggle-promotion {
+  width: 62px;
+  height: 62px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.notice .notice-line .inner__right .toggle-promotion .material-icons {
+  font-size: 30px;
+}
+/*PROMOTION*/
+.notice .promotion {
+  /*width: auto;*/
+  height: 693px;
+  background-color: #f6f5ef;
+  position: relative;
+  overflow: hidden;
+  transition: height .4s;
+}
+.notice .promotion.hide {
+  height: 0;
+}
+.notice .promotion .swiper-container {
+  /* 819px 슬라이드 3개와 그 사이 여백 10px씩 = 2477px */
+  /* 스와이퍼 가로넓이를 함수로 자동으로 계산처리
+  819xp 크기의 요소 3개를 사이 20px로 계산 */
+  width: calc(819px * 3 + 20px);
+  height: 553px;
+  /* 사진을 확대해도 가운데로 보이도록 설정 */
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  /* -1238.5px */
+  /* 전체 크기의 / -2 절반 만큼을 나누기 */
+  margin-left: calc((819px * 3 + 20px) / -2);
+}
+.notice .promotion .swiper-slide {
+  position: relative;
+  opacity: .5;
+  transition: opacity 1s;
+}
+/* .swiper-slide-active 현재 액티브 중인 슬라이더 이미지 */
+/* 액티브 된 이미지만 좀 더 선명하게 설정 */
+.notice .promotion .swiper-slide-active {
+  opacity: 1;
+}
+.notice .promotion .swiper-slide .btn {
+  /*가운데 정렬을 위해서 넓이가 필요하지만 width: 130px;
+  위의 btn 클래스에 이미 정의되어 있어서 넣을 필요 없다.*/
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.notice .promotion .swiper-pagination {
+  bottom: 40px;
+  left: 0;
+  right: 0;
+  z-index: 0;
+}
+/* 이미지 하단의 o o o o 버튼을 눌러서 이미지 이동 적용 */
+.notice .promotion .swiper-pagination .swiper-pagination-bullet {
+  background-color: transparent;
+  background-image: url("../images/promotion_slide_pager.png");
+  width: 13px;
+  height: 12px;
+  margin-right: 6px;
+  outline: none;
+}
+/* .swiper-pagination-bullet:last-child 마지막 라인에 여백을 없애기 위해 */
+.notice .promotion .swiper-pagination .swiper-pagination-bullet:last-child {
+  margin-right: 0;
+}
+/* o o o o  동그라미의 색 또는 이미지를 적용하기*/
+.notice .promotion .swiper-pagination .swiper-pagination-bullet-active {
+  background-image: url("../images/promotion_slide_pager_on.png");
+}
+/* 좌,우 화살표를 다중 선택자로 같은 css를 적용 */
+.notice .promotion .swiper-prev,
+.notice .promotion .swiper-next {
+  width: 42px;
+  height: 42px;
+  outline: none;
+  border: 2px solid #333;
+  border-radius: 50%;
+  position: absolute;
+  /* Swiper Container 높이의 절반만큼 끌어올림 */
+  /* 버튼 높이의 절반만큼 추가로 끌어올림 */
+  top: 300px;
+  z-index: 1;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: .4s;
+}
+.notice .promotion .swiper-prev {
+  left: 50%;
+  margin-left: -480px;
+}
+.notice .promotion .swiper-next {
+  right: 50%;
+  margin-right: -480px;
+}
+.notice .promotion .swiper-prev:hover,
+.notice .promotion .swiper-next:hover {
+  background-color: #333;
+  color: #fff;
+}
+/*REWARDS*/
+.rewards {
+  position: relative;
+}
+.rewards .bg-left {
+  width: 50%;
+  height: 100%;
+  background-color: #272727;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.rewards .bg-right {
+  width: 50%;
+  height: 100%;
+  background-color: #d5c798;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.rewards .inner {
+  background-image: url("../images/rewards.jpg");
+  height: 241px;
+}
+/* 리워드 버튼 css */
+.rewards .btn-group {
+  position: absolute;
+  right: 0;
+  bottom: 24px;
+  width: 250px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.rewards .btn-group .btn.sign-up {
+  /*width: 130px;*/
+  margin-right: 10px;
+}
+.rewards .btn-group .btn.sign-in {
+  width: 110px;
+}
+.rewards .btn-group .btn.gift {
+  margin-top: 10px;
+  flex: 1;
+}
+/*YOUTUBE VIDEO*/
+.youtube {
+  position: relative;
+  height: 700px;
+  background-color: #333;
+  overflow: hidden;
+}
+.youtube .youtube__area {
+  /* FHD - 1920x1080 */
+  width: 1920px;
+  position: absolute;
+  /* 16비율  및 가운데 정렬*/
+  left: 50%;
+  margin-left: calc(1920px / -2);
+  /* 9비율 */
+  top: 50%;
+  margin-top: calc(1920px * 9 / 16 / -2);
+}
+/* html에서 적용하는 것이 아닌, 가상의 요소를 만들어서 css에서 처리 */
+.youtube .youtube__area::before {
+  content: "";
+  display: block;
+  /* 16:9 영상 비율로 요소 크기 만들기! */
+  width: 100%;
+  height: 0;
+  padding-top: 56.25%;
+}
+/* 유튜브 영상을 배경 처리하기 */
+.youtube .youtube__cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,.3);
+  background-image: url("../images/video_cover_pattern.png");
+}
+#player {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+/* 배경 이미지 앞에 떠다니는 이미지 적용하기 */
+.youtube .inner {
+  height: inherit;
+}
+.youtube .floating1 {
+  position: absolute;
+  top: 50px;
+  left: 0;
+}
+.youtube .floating2 {
+  position: absolute;
+  top: 350px;
+  left: 150px;
+}
+/*SEASON PRODUCT*/
+.season-product {
+  background-image: url("../images/season_product_bg.jpg");
+}
+.season-product .inner {
+  height: 400px;
+}
+.season-product .floating3 {
+  position: absolute;
+  top: -200px;
+  right: 0;
+}
+.season-product .text-group {
+  position: absolute;
+  top: 110px;
+  right: 100px;
+}
+.season-product .text-group .title {
+  margin-bottom: 10px;
+}
+.season-product .text-group .description {
+  margin-bottom: 15px;
+}
+/*RESERVE COFFEE*/
+.reserve-coffee {
+  background-image: url("../images/reserve_bg.jpg");
+}
+.reserve-coffee .inner {
+  height: 400px;
+}
+.reserve-coffee .reserve-logo {
+  position: absolute;
+  top: 110px;
+  left: 0;
+}
+.reserve-coffee .text-group {
+  position: absolute;
+  top: 124px;
+  left: 208px;
+}
+.reserve-coffee .product {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+/*PICK YOUR FAVORITE*/
+.pick-your-favorite {
+  /* 패럴랙스 적용 */
+  background-image: url("../images/favorite_bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  /* 기본적으로 요소가 스크롤이 될때 배경이 뷰포트에 고정이 되도록 */
+  background-attachment: fixed;
+  /* 배경의 이미지를 요소의 더 넓은 너비에 맞추어서 출력 - 패럴레스*/
+  background-size: cover;
+}
+.pick-your-favorite .inner {
+  padding: 110px 0;
+}
+.pick-your-favorite .text-group {
+  width: 362px;
+  margin-left: 100px;
+  display: flex;
+  /* 해당 영역에 우측 정렬 */
+  justify-content: flex-end;
+  /* 줄바꿈이 가능한 형태 */
+  flex-wrap: wrap;
+}
+.pick-your-favorite .text-group .title {
+  margin-bottom: 40px;
+}
+.pick-your-favorite .text-group .description {
+  margin-bottom: 40px;
+}
+/*RESERVE STORE*/
+.reserve-store {
+  /* 패럴랙스 적용 */
+  background-image: url("../images/reserve_store_bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+.reserve-store .inner {
+  height: 600px;
+  display: flex;
+  /* 수평 가운데 정렬 */
+  justify-content: center;
+  /* 수직 가운데 정렬 */
+  align-items: center;
+}
+.reserve-store .medal {
+  width: 334px;
+  height: 334px;
+  /* 원근 거리 추가하기 */
+  perspective: 600px;
+}
+/* 다중 선택자 */
+.reserve-store .medal .front,
+.reserve-store .medal .back {
+  width: inherit;
+  height: inherit;
+  position: absolute;
+  transition: 1s;
+  backface-visibility: hidden;
+}
+.reserve-store .medal .front {
+  /* 명시적인 작성, 다른 브라우저에서 작동 안될 수 있기에 
+  적어주는 것을 추천한다. */
+  transform: rotateY(0deg);
+}
+.reserve-store .medal:hover .front {
+  transform: rotateY(180deg);
+}
+.reserve-store .medal .back {
+  /* 뒤집기 */
+  transform: rotateY(-180deg);
+}
+.reserve-store .medal:hover .back {
+  transform: rotateY(0deg);
+}
+.reserve-store .medal .back .btn {
+  position: absolute;
+  top: 240px;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+/*FIND STORE*/
+.find-store {
+  background-image: url("../images/find_store_bg.jpg");
+}
+.find-store .inner {
+  height: 400px;
+}
+.find-store .texture1 {
+  position: absolute;
+  top: 0;
+  left: 400px;
+}
+.find-store .texture2 {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.find-store .picture {
+  border-radius: 50%;
+  box-shadow: 2px 2px 8px 0 rgba(0,0,0,.5);
+  position: absolute;
+}
+.find-store .picture1 {
+  top: -60px;
+  left: 0;
+}
+.find-store .picture2 {
+  top: 150px;
+  left: 250px;
+}
+.find-store .text-group {
+  position: absolute;
+  top: 120px;
+  left: 550px;
+}
+.find-store .text-group .title {
+  margin-bottom: 20px;
+}
+.find-store .text-group .description {
+  margin-bottom: 20px;
+}
+/*AWARDS*/
+.awards {
+  background-color: #272727;
+}
+.awards .inner {
+  padding: 40px 0;
+}
+.awards .swiper-container {
+  width: 100%;
+  height: 40px;
+}
+.awards .swiper-prev,
+.awards .swiper-next {
+  width: 42px;
+  height: 42px;
+  outline: none;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  opacity: .3;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: .4s;
+}
+.awards .swiper-prev {
+  left: -100px;
+}
+.awards .swiper-next {
+  right: -100px;
+}
+.awards .swiper-prev:hover,
+.awards .swiper-next:hover {
+  background-color: #fff;
+  color: #333;
+}
+/*SCROLL TO TOP*/
+#to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  /* 항상 다른 섹션들보다 위에 배치 */
+  z-index: 9;
+  width: 42px;
+  height: 42px;
+  background-color: #333;
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

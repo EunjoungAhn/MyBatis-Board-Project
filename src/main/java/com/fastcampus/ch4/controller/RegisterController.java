@@ -14,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller // ctrl+shift+o 자동 import
 @RequestMapping("/register")
@@ -47,7 +46,7 @@ public class RegisterController {
             if (userDao.insertUser(user) != 1)
                 throw new Exception("Sign in failed.");
 
-            return "index";
+            return "redirect:/";
         } catch (Exception e) {
             e.printStackTrace();
             return "registerForm";
