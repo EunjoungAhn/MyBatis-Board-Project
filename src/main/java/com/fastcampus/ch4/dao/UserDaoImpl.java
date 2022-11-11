@@ -18,19 +18,20 @@ public class UserDaoImpl implements UserDao {
     DataSource ds;
 
     @Override
-    public int deleteUser(String id) throws Exception {
+    public int deleteUser(String id, String pwd) throws Exception {
         int rowCnt = 0;
-        String sql = "DELETE FROM user_info WHERE id= ? ";
+        String sql = "DELETE FROM user_info WHERE id= ? and pwd = ?";
 
         try (  // try-with-resources - since jdk7
                Connection conn = ds.getConnection();
                PreparedStatement pstmt = conn.prepareStatement(sql);
         ){
             pstmt.setString(1, id);
+            pstmt.setString(2, pwd);
             return pstmt.executeUpdate(); //  insert, delete, update
-//      } catch (Exception e) {
-//          e.printStackTrace();
-//          throw e;
+        } catch (Exception e) {
+          e.printStackTrace();
+          throw e;
         }
     }
 

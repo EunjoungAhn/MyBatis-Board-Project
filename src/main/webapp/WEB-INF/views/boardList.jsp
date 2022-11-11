@@ -202,7 +202,7 @@
                     <a href="<c:url value='/board/list'/>">Board</a>
                 </li>
                 <li>
-                    <a href="<c:url value='/register/add'/>">Sign In</a>
+                    <a href="<c:url value='/register/delete'/>">Delete Id</a>
                 </li>
             </ul>
         </div>

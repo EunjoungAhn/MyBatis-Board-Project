@@ -1,8 +1,10 @@
 package com.fastcampus.ch4.controller;
 
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.fastcampus.ch4.dao.UserDao;
@@ -56,4 +58,22 @@ public class RegisterController {
     private boolean isValid(User user) {
         return true;
     }
+
+    @GetMapping("/delete")
+    public String deleteForm(){
+        return "deleteForm";
+    }
+
+    @PostMapping("/delete")
+    public String delete(String id, String pwd, HttpSession session) throws Exception {
+        System.out.println("delete: id = " + id + "/ pwd:" + pwd);
+        // 1. id와 pwd를 확인
+        if(pwd != null) {
+            userDao.deleteUser(id, pwd);
+            session.invalidate();
+            return "redirect:/";
+        }
+        return "redirect:/board/list";
+    }
+
 }
