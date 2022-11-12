@@ -43,58 +43,62 @@
 
     <script defer src="../js/common.js"></script>
 
-    <!-- board 전용 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--  회원가입 전용  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
     <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: "Noto Sans KR", sans-serif;
+        * { box-sizing:border-box; }
+        form {
+            width:400px;
+            height:600px;
+            display : flex;
+            flex-direction: column;
+            align-items:center;
+            position : absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%, -50%) ;
+            border: 1px solid rgb(89,117,196);
+            border-radius: 10px;
         }
-        .container {
-            width : 50%;
-            margin : auto;
+        .input-field {
+            width: 300px;
+            height: 40px;
+            border : 1px solid rgb(89,117,196);
+            border-radius:5px;
+            padding: 0 10px;
+            margin-bottom: 10px;
         }
-        .writing-header {
-            position: relative;
-            margin: 20px 0 0 0;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #323232;
+
+        label {
+            width:300px;
+            height:30px;
+            margin-top :4px;
         }
-        input {
-            width: 100%;
-            height: 35px;
-            margin: 68px 0px 10px 0px;
-            border: 1px solid #e9e8e8;
-            padding: 8px;
-            background: #f8f8f8;
-            outline-color: #e6e6e6;
-        }
-        textarea {
-            width: 100%;
-            background: #f8f8f8;
-            margin: 5px 0px 10px 0px;
-            border: 1px solid #e9e8e8;
-            resize: none;
-            padding: 8px;
-            outline-color: #e6e6e6;
-        }
-        .frm {
-            width:100%;
-        }
-        .btn {
-            background-color: rgb(236, 236, 236); /* Blue background */
-            border: none; /* Remove borders */
-            color: black; /* White text */
-            padding: 6px 12px; /* Some padding */
-            font-size: 16px; /* Set a font size */
-            cursor: pointer; /* Mouse pointer on hover */
+        button {
+            background-color: rgb(89,117,196);
+            color : white;
+            width:300px;
+            height:50px;
+            font-size: 17px;
+            border : none;
             border-radius: 5px;
+            margin : 20px 0 30px 0;
         }
-        .btn:hover {
-            text-decoration: underline;
+        .title {
+            font-size : 50px;
+            margin: 40px 0 30px 0;
+        }
+        .msg {
+            height: 30px;
+            text-align:center;
+            font-size:16px;
+            color:red;
+            margin-bottom: 20px;
+        }
+
+        .sns-chk {
+            margin-top : 5px;
         }
     </style>
 
@@ -119,7 +123,7 @@
                     <a href="<c:url value='/board/list'/>">Board</a>
                 </li>
                 <li>
-                    <a href="<c:url value='/register/delete'/>">Delete Id</a>
+                    <a href="<c:url value='/register/add'/>">Sign In</a>
                 </li>
                 <li>
                     <a href="<c:url value='${loginOutLink}'/>">LogOut</a>
@@ -428,121 +432,62 @@
     </div>
 </header>
 
-<h2>
-    <strong>게시판 글쓰기</strong>
-</h2>
-<script>
-    let msg = "${msg}";
-    if(msg=="WRT_ERR") alert("게시물 등록에 실패하였습니다. 다시 시도해 주세요.");
-    if(msg=="MOD_ERR") alert("게시물 수정에 실패하였습니다. 다시 시도해 주세요.");
-</script>
-<div class="container">
-    <h2 class="writing-header">게시판 ${mode=="new" ? "글쓰기" : "읽기"}</h2>
-    <form id="form" class="frm" action="" method="post">
-        <input type="hidden" name="bno" value="${boardDto.bno}">
-
-        <input name="title" type="text" value="<c:out value='${boardDto.title}'/>" placeholder="  제목을 입력해 주세요." ${mode=="new" ? "" : "readonly='readonly'"}><br>
-        <textarea name="content" rows="20" placeholder=" 내용을 입력해 주세요." ${mode=="new" ? "" : "readonly='readonly'"}><c:out value="${boardDto.content}"/></textarea><br>
-
-        <c:if test="${mode eq 'new'}">
-            <button type="button" id="writeBtn" class="btn btn-write"><i class="fa fa-pencil"></i> 등록</button>
-        </c:if>
-        <c:if test="${mode ne 'new'}">
-            <button type="button" id="writeNewBtn" class="btn btn-write"><i class="fa fa-pencil"></i> 글쓰기</button>
-        </c:if>
-        <c:if test="${boardDto.writer eq loginId}">
-            <button type="button" id="modifyBtn" class="btn btn-modify"><i class="fa fa-edit"></i> 수정</button>
-            <button type="button" id="removeBtn" class="btn btn-remove"><i class="fa fa-trash"></i> 삭제</button>
-        </c:if>
-        <button type="button" id="listBtn" class="btn btn-list"><i class="fa fa-bars"></i> 목록</button>
-    </form>
-</div>
-
-<!--FOOTER-->
-<footer>
-    <div class="inner">
-
-        <ul class="menu">
-            <li><a href="javascript:void(0)" class="green">개인정보처리방침</a></li>
-            <li><a href="javascript:void(0)">영상정보처리기기 운영관리 방침</a></li>
-            <li><a href="javascript:void(0)">홈페이지 이용약관</a></li>
-            <li><a href="javascript:void(0)">위치정보 이용약관</a></li>
-            <li><a href="javascript:void(0)">스타벅스 카드 이용약관</a></li>
-            <li><a href="javascript:void(0)">윤리경영 핫라인</a></li>
-        </ul>
-
-        <div class="btn-group">
-            <a href="javascript:void(0)" class="btn btn--white">찾아오시는 길</a>
-            <a href="javascript:void(0)" class="btn btn--white">신규입점제의</a>
-            <a href="javascript:void(0)" class="btn btn--white">사이트 맵</a>
-        </div>
-
-        <div class="info">
-            <span>사업자등록번호 201-81-21515</span>
-            <span>(주)스타벅스 코리아 대표이사 이석구</span>
-            <span>TEL : 02) 3015-1100 / FAX : 02) 3015-1106</span>
-            <span>개인정보 책임자 : 강기원</span>
-        </div>
-
-        <p class="copyright">
-            &copy; <span class="this-year"></span> Starbucks Coffee Company. All Rights Reserved.
-        </p>
-        <img src="../images/starbucks_logo_only_text.png" alt="STAR BUCKS" class="logo" />
-
+<form id="form" class="frm" action="/register/updateUser'/" method="post">
+    <div class="title">회원정보 수정 </div>
+    <label for="">아이디</label>
+    <input class="input-field" type="text" name="id" placeholder="8~12자리의 영대소문자와 숫자 조합" autofocus>
+    <label for="">비밀번호</label>
+    <input class="input-field" type="text" name="pwd" placeholder="8~12자리의 영대소문자와 숫자 조합">
+    <label for="">이름</label>
+    <input class="input-field" type="text" name="name" placeholder="홍길동">
+    <label for="">이메일</label>
+    <input class="input-field" type="text" name="email" placeholder="example@fastcampus.co.kr">
+    <label for="">생일</label>
+    <input class="input-field" type="text" name="birth" placeholder="2020-12-31">
+    <div class="sns-chk">
+        <label><input type="checkbox" name="sns" value="facebook"/>페이스북</label>
+        <label><input type="checkbox" name="sns" value="kakaotalk"/>카카오톡</label>
+        <label><input type="checkbox" name="sns" value="instagram"/>인스타그램</label>
     </div>
-</footer>
+    <button type="button" id="signInBtn">수정</button>
+</form>
 <script>
-    $(document).ready(function(){
+    $(document).ready(function() {
         let formCheck = function() {
             let form = document.getElementById("form");
-            if(form.title.value=="") {
-                alert("제목을 입력해 주세요.");
-                form.title.focus();
+            if (form.id.value.length < 3) {
+                alert('id의 길이는 3이상이어야 합니다.');
                 return false;
             }
-            if(form.content.value=="") {
-                alert("내용을 입력해 주세요.");
-                form.content.focus();
+            if(form.pwd.value=="") {
+                alert("비밀번호를 입력해 주세요.");
+                form.pwd.focus();
+                return false;
+            }
+            if(form.name.value=="") {
+                alert("이름을 입력해 주세요.");
+                form.name.focus();
+                return false;
+            }
+            if(form.email.value=="") {
+                alert("이메일을 입력해 주세요.");
+                form.email.focus();
+                return false;
+            }
+            if(form.birth.value=="") {
+                alert("생일을 입력해 주세요.");
+                form.birth.focus();
                 return false;
             }
             return true;
         }
-        $("#writeNewBtn").on("click", function(){
-            location.href="<c:url value='/board/write'/>";
-        });
-        $("#writeBtn").on("click", function(){
+
+        $("#signInBtn").on("click", function(){
             let form = $("#form");
-            form.attr("action", "<c:url value='/board/write'/>");
+            form.attr("action", "<c:url value='/register/updateUser'/>");
             form.attr("method", "post");
             if(formCheck())
                 form.submit();
-        });
-        $("#modifyBtn").on("click", function(){
-            let form = $("#form");
-            let isReadonly = $("input[name=title]").attr('readonly');
-            // 1. 읽기 상태이면, 수정 상태로 변경
-            if(isReadonly=='readonly') {
-                $(".writing-header").html("게시판 수정");
-                $("input[name=title]").attr('readonly', false);
-                $("textarea").attr('readonly', false);
-                $("#modifyBtn").html("<i class='fa fa-pencil'></i> 등록");
-                return;
-            }
-            // 2. 수정 상태이면, 수정된 내용을 서버로 전송
-            form.attr("action", "<c:url value='/board/modify${searchCondition.queryString}'/>");
-            form.attr("method", "post");
-            if(formCheck())
-                form.submit();
-        });
-        $("#removeBtn").on("click", function(){
-            if(!confirm("정말로 삭제하시겠습니까?")) return;
-            let form = $("#form");
-            form.attr("action", "<c:url value='/board/remove${searchCondition.queryString}'/>");
-            form.attr("method", "post");
-            form.submit();
-        });
-        $("#listBtn").on("click", function(){
-            location.href="<c:url value='/board/list${searchCondition.queryString}'/>";
         });
     });
 </script>

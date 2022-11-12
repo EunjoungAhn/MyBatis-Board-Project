@@ -76,4 +76,21 @@ public class RegisterController {
         return "redirect:/board/list";
     }
 
+    @GetMapping("/myInfo")
+    public String myInfo() {
+        return "myInfo";
+    }
+
+    @PostMapping("/updateUser")
+    public String updateUser(String id, String pwd, HttpSession session) throws Exception {
+        System.out.println("delete: id = " + id + "/ pwd:" + pwd);
+        // 1. id와 pwd를 확인
+        if(pwd != null) {
+            userDao.deleteUser(id, pwd);
+            session.invalidate();
+            return "redirect:/";
+        }
+        return "redirect:/board/list";
+    }
+
 }

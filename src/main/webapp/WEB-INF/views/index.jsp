@@ -2,8 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false"%>
 <c:set var="loginId" value="${pageContext.request.getSession(false)==null ? '' : pageContext.request.session.getAttribute('id')}"/>
-<c:set var="loginOutLink" value="${loginId=='' ? '/login/login' : '/login/logout'}"/>
-<c:set var="loginOut" value="${loginId=='' ? 'Login' : loginId+='님'}"/>
+<%--<c:set var="loginOutLink" value="${loginId=='' ? '/login/login' : '/login/logout'}"/>--%>
+<c:set var="login" value="${loginId=='' ? 'Login' : loginId+='님'}"/>
+<c:set var="myInfo" value="${loginId=='' ? '/login/login' : '/register/myInfo'}"/>
+<c:set var="loginOutLink" value="${'/login/logout'}"/>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -67,13 +69,16 @@
                     <a href="<c:url value='/'/>">Home</a>
                 </li>
                 <li>
-                    <a href="<c:url value='${loginOutLink}'/>">${loginOut}</a>
+                    <a href="<c:url value='${myInfo}'/>">${login}</a>
                 </li>
                 <li>
                     <a href="<c:url value='/board/list'/>">Board</a>
                 </li>
                 <li>
                     <a href="<c:url value='/register/add'/>">Sign In</a>
+                </li>
+                <li>
+                    <a href="<c:url value='${loginOutLink}'/>">LogOut</a>
                 </li>
             </ul>
 
