@@ -435,20 +435,13 @@
 <form id="form" class="frm" action="/register/updateUser'/" method="post">
     <div class="title">회원정보 수정 </div>
     <label for="">아이디</label>
-    <input class="input-field" type="text" name="id" placeholder="8~12자리의 영대소문자와 숫자 조합" autofocus>
+    <input class="input-field" type="text" name="id" placeholder="8~12자리의 영대소문자와 숫자 조합" value="${user.id}" readonly>
     <label for="">비밀번호</label>
-    <input class="input-field" type="text" name="pwd" placeholder="8~12자리의 영대소문자와 숫자 조합">
+    <input class="input-field" type="text" name="pwd" placeholder="8~12자리의 영대소문자와 숫자 조합" value="${user.pwd}">
     <label for="">이름</label>
-    <input class="input-field" type="text" name="name" placeholder="홍길동">
+    <input class="input-field" type="text" name="name" placeholder="홍길동" value="${user.name}" readonly>
     <label for="">이메일</label>
-    <input class="input-field" type="text" name="email" placeholder="example@fastcampus.co.kr">
-    <label for="">생일</label>
-    <input class="input-field" type="text" name="birth" placeholder="2020-12-31">
-    <div class="sns-chk">
-        <label><input type="checkbox" name="sns" value="facebook"/>페이스북</label>
-        <label><input type="checkbox" name="sns" value="kakaotalk"/>카카오톡</label>
-        <label><input type="checkbox" name="sns" value="instagram"/>인스타그램</label>
-    </div>
+    <input class="input-field" type="text" name="email" placeholder="example@fastcampus.co.kr" value="${user.email}">
     <button type="button" id="signInBtn">수정</button>
 </form>
 <script>
@@ -464,19 +457,9 @@
                 form.pwd.focus();
                 return false;
             }
-            if(form.name.value=="") {
-                alert("이름을 입력해 주세요.");
-                form.name.focus();
-                return false;
-            }
             if(form.email.value=="") {
                 alert("이메일을 입력해 주세요.");
                 form.email.focus();
-                return false;
-            }
-            if(form.birth.value=="") {
-                alert("생일을 입력해 주세요.");
-                form.birth.focus();
                 return false;
             }
             return true;
