@@ -432,7 +432,7 @@
     </div>
 </header>
 
-<form id="form" class="frm" action="/register/updateUser'/" method="post">
+<form id="form" class="frm" action="/register/updateUser'" method="post">
     <div class="title">회원정보 수정 </div>
     <label for="">아이디</label>
     <input class="input-field" type="text" name="id" placeholder="8~12자리의 영대소문자와 숫자 조합" value="${user.id}" readonly>
@@ -442,7 +442,7 @@
     <input class="input-field" type="text" name="name" placeholder="홍길동" value="${user.name}" readonly>
     <label for="">이메일</label>
     <input class="input-field" type="text" name="email" placeholder="example@fastcampus.co.kr" value="${user.email}">
-    <button type="button" id="signInBtn">수정</button>
+    <button type="button" id="updateBtn">수정</button>
 </form>
 <script>
     $(document).ready(function() {
@@ -465,7 +465,7 @@
             return true;
         }
 
-        $("#signInBtn").on("click", function(){
+        $("#updateBtn").on("click", function(){
             let form = $("#form");
             form.attr("action", "<c:url value='/register/updateUser'/>");
             form.attr("method", "post");

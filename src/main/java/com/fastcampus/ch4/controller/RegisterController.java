@@ -86,10 +86,8 @@ public class RegisterController {
         User user = null;
         HttpSession session = request.getSession();
         String id = (String) session.getAttribute("id");
-        System.out.println("id = " + id);
         try {
             user = userDao.selectUser(id);
-            System.out.println("user = " + user);
             m.addAttribute(user);
         } catch (Exception e) {
             e.printStackTrace();
@@ -100,13 +98,13 @@ public class RegisterController {
     }
 
     @PostMapping("/updateUser")
-    public String updateUser(User user, String pwd, HttpSession session) throws Exception {
+    public String updateUser(User user) throws Exception {
         if(user != null) {
             userDao.updateUser(user);
-            session.invalidate();
-            return "myInfo";
+            System.out.println("user = " + user);
+            return "redirect:/";
         }
-        return "myInfo";
+        return "redirect:/";
     }
 
 }

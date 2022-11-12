@@ -89,7 +89,7 @@ public class UserDaoImpl implements UserDao {
         int rowCnt = 0;
 
         String sql = "UPDATE user_info " +
-                "SET pwd = ?, name=?, email=?, birth =?, sns=?, reg_date=? " +
+                "SET pwd = ?, email=?" +
                 "WHERE id = ? ";
 
         try (
@@ -97,12 +97,10 @@ public class UserDaoImpl implements UserDao {
                 PreparedStatement pstmt = conn.prepareStatement(sql);
         ){
             pstmt.setString(1, user.getPwd());
-            pstmt.setString(2, user.getName());
-            pstmt.setString(3, user.getEmail());
-            pstmt.setDate(4, new java.sql.Date(user.getBirth().getTime()));
-            pstmt.setString(5, user.getSns());
-            pstmt.setTimestamp(6, new java.sql.Timestamp(user.getReg_date().getTime()));
-            pstmt.setString(7, user.getId());
+            pstmt.setString(2, user.getEmail());
+//            pstmt.setDate(4, new java.sql.Date(user.getBirth().getTime()));
+//            pstmt.setString(5, user.getSns());
+            pstmt.setString(3, user.getId());
 
             rowCnt = pstmt.executeUpdate();
         }
