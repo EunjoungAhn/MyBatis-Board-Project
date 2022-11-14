@@ -456,6 +456,39 @@
         </c:if>
         <button type="button" id="listBtn" class="btn btn-list"><i class="fa fa-bars"></i> 목록</button>
     </form>
+
+<%-- 댓글 창 --%>
+    <section class="mb-5">
+        <div class="card bg-light">
+            <div class="card-body">
+                <!-- Comment form-->
+                <form class="mb-4"><textarea class="form-control" rows="3" placeholder="댓글을 입력해주세요."></textarea></form>
+                <!-- Comment with nested comments-->
+                <div class="d-flex mb-4">
+                    <!-- Parent comment-->
+                    <div class="ms-3">
+                        <div class="fw-bold">test</div>
+                        test
+                        <!-- Child comment 1-->
+                        <div class="d-flex mt-4">
+                            <div class="ms-3">
+                                <div class="fw-bold">test2</div>
+                                test2
+                            </div>
+                        </div>
+                        <!-- Child comment 2-->
+                        <div class="d-flex mt-4">
+                            <div class="ms-3">
+                                <div class="fw-bold">test3</div>
+                                test3
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 </div>
 
 <!--FOOTER-->
