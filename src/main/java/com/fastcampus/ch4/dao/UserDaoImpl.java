@@ -4,6 +4,7 @@ import com.fastcampus.ch4.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+import org.apache.ibatis.session.*;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -11,9 +12,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Repository
 public class UserDaoImpl implements UserDao {
+    @Autowired
+    private SqlSession session;
+    private static String namespace = "com.fastcampus.ch4.dao.AdminMapper.";
+
     @Autowired
     DataSource ds;
 
@@ -133,4 +140,26 @@ public class UserDaoImpl implements UserDao {
             pstmt.executeUpdate();
         }
     }
+
+    @Override
+    public List<User> selectPage(Map map) throws Exception {
+        return session.selectList(namespace + "selectPage", map);
+    } // List<E> selectList(String statement, Object parameter)
+
+    @Override
+    public List<User> selectAll() throws Exception {
+        return null;
+    }
+
+    @Override
+    public int searchResultCnt(SearchCondition sc) throws Exception {
+        System.out.println("sc in searchResultCnt() = " + sc);
+        System.out.println("session = " + session);
+        return session.selectOne(namespace + "searchResultCnt", sc);
+    } // T selectOne(String statement, Object parameter)
+
+    @Override
+    public List<User> searchSelectPage(SearchCondition sc) throws Exception {
+        return session.selectList(namespace + "searchSelectPage", sc);
+    } // List<E> selectList(String statement, Object parameter)
 }

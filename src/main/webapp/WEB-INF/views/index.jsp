@@ -80,6 +80,9 @@
                 <li>
                     <a href="<c:url value='${loginOutLink}'/>">LogOut</a>
                 </li>
+                <li>
+                    <a href="<c:url value='/admin/list'/>">Admin</a>
+                </li>
             </ul>
 
             <div class="search">

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fastcampus.ch4.dao.AdminMapper">
+    <delete id="deleteAll">
+        DELETE FROM user_info
+    </delete>
+
+    <delete id="delete" parameterType="map">
+        DELETE FROM user_info WHERE id = #{id}
+    </delete>
+
+    <insert id="insert" parameterType="User">
+        INSERT INTO user_info
+            (id, pwd, name, email, birth, sns, reg_date)
+        VALUES
+            (#{id}, #{pwd}, #{name}, #{email}, #{birth}, #{sns}, #{reg_date})
+    </insert>
+
+    <select id="selectAll" resultType="User">
+        SELECT id, name, email, birth, reg_date
+        FROM user_info
+        ORDER BY reg_date DESC, id DESC
+    </select>
+
+    <sql id="selectFromAdmin">
+        SELECT id, name, email, birth, reg_date
+        FROM user_info
+    </sql>
+
+    <select id="select" parameterType="int" resultType="User">
+        <include refid="selectFromAdmin"/>
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectPage" parameterType="map" resultType="User">
+        <include refid="selectFromAdmin"/>
+        ORDER BY reg_date DESC, id DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+<!--
+    <update id="update" parameterType="User">
+        UPDATE board
+        SET   title = #{title}
+          , content = #{content}
+          , up_date = now()
+        WHERE bno = #{bno}
+    </update>
+-->
+    <sql id="searchCondition">
+        <choose>
+            <when test='option=="N"'>
+                AND name LIKE concat('%', #{keyword}, '%')
+            </when>
+            <when test='option=="M"'>
+                AND email LIKE concat('%', #{keyword}, '%')
+            </when>
+        </choose>
+    </sql>
+
+    <select id="searchSelectPage" parameterType="SearchCondition" resultType="User">
+        SELECT id, name, email, reg_date
+        FROM  user_info
+        WHERE true
+        <include refid="searchCondition"/>
+        ORDER BY reg_date DESC, id DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="searchResultCnt" parameterType="SearchCondition" resultType="int">
+        SELECT count(*)
+        FROM  user_info
+        WHERE true
+        <include refid="searchCondition"/>
+    </select>
+</mapper>
